@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Save";
+}
+
+    <div ng-controller="MovieController">
+        <legend>Movie</legend>
+
+        <div class="editor-label">
+            Title
+        </div>
+        <div class="editor-field">
+            <input type ="text" ng-model="movie.title" class="form-control" />
+        </div>
+
+        <div class="editor-label">
+            Release Date
+        </div>
+        <div class="editor-field">
+            <input type ="date" ng-model="movie.releasedate" class="form-control" placeholder="The release date of the movie"/>
+        </div>
+
+        <div class="editor-label">
+            Genre
+        </div>
+        <div class="editor-field">
+            <input type ="text" ng-model="movie.genre" class="form-control" />
+        </div>
+        <br />
+        <p>
+             <button class="btn btn-default" ng-click="save(movie)">Save Movie</button>
+        </p>
+            <div style="color:red;" ng-show="error">An error occurred</div>
+   </div>
+
+<div>
+    @Html.ActionLink("Back to List", "List", "Movie")
+</div>
+

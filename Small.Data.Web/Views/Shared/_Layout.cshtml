@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    @*<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>*@
+
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap-spacelab-min.css")" rel="stylesheet" />
+
+    <script src="@Url.Content("~/Scripts/jquery-2.0.3.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/angular.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/angular-route.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/ui-bootstrap-tpls-0.9.0.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Scripts/app/movie-module.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Movie/movie-controller.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Movie/movie-repository.js")" type="text/javascript"></script>
+
+</head>
+<body ng-app="smalldata">
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <h2>Small Data</h2>
+            </div>
+            <div id="logindisplay">
+                @Html.Partial("_LogOnPartial")
+            </div>
+            <div id="menucontainer">
+                <ul id="menu">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+        </div>
+    </div>
+</body>
+</html>
