@@ -3,3 +3,4 @@
         $routeProvider.when('/Movie/Save', { templateUrl: '/Movie/Save', controller: 'movieController'});
         $locationProvider.html5Mode(true);
     });
+

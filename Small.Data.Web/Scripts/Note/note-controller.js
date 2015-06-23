@@ -1,12 +1,12 @@
 ﻿'use strict';
 
 // Controller should be an entry point to and from your views
-simpleMovie.controller("MovieController", function ($scope, $location, $log, movieRepository) {
-    $scope.save = function (movie) {
+simpleNote.controller("NoteController", function ($scope, $location, $log, noteRepository) {
+    $scope.save = function (note) {
         // Disable the save button to stop multiple hits
         document.getElementById('btnSave').disabled = true;
         $scope.error = false;
-        movieRepository.save(movie).then(
+        noteRepository.save(note).then(
             function () {
                 var newUrl = $location.protocol() + '://' + $location.host() + ':' + $location.port();
                 var pathParts = $location.path().split('/');

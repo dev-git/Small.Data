@@ -24,24 +24,41 @@ namespace Small.Data.Dat
 		{
 			// Check if the database exists
 			string conStrPath = connectionString.Split(';')[0].Replace("Data Source=", "");
+			SQLiteConnection connection = new SQLiteConnection();
 
 			if (!File.Exists(conStrPath))
 			{
-				SQLiteConnection connection = new SQLiteConnection();
+				try
+				{
+					System.Data.SQLite.SQLiteConnection.CreateFile(connection.DataSource);
+					connection.ConnectionString = connectionString;
+					connection.Open();
+					CreateTable();
+					connection.Close();
+				}
+				catch (Exception ex)
+				{
+					
+				}
+				finally
+				{
+					if (connection.State != ConnectionState.Closed)
+					{
+						connection.Close();
+					}
+				}
+			}
+			else
+			{
 				try
 				{
 					connection.ConnectionString = connectionString;
 					connection.Open();
-					connection.Close();
 					CreateTable();
-
+					connection.Close();
 				}
 				catch (Exception ex)
 				{
-					System.Data.SQLite.SQLiteConnection.CreateFile(connection.DataSource);
-					connection.Open();
-					connection.Close();
-					CreateTable();
 				}
 				finally
 				{
@@ -56,17 +73,29 @@ namespace Small.Data.Dat
 		private static void CreateTable()
 		{
 			// See if the table exists
-			object lok = GetScalar("select * from sqlite_master where type = 'table' and name = 'SimpleMovie';");
+			object lok = GetScalar("select * from sqlite_master where type = 'table' and name = 'Movie';");
 			if (lok == null)
 			{
 				// CURRENT_TIMESTAMP doesn't store milleseconds, therefore it has been changes to the 'strftime' function.
 				string tableStr = "create table Movie (movie_pk integer primary key autoincrement, movie_date datetime, " +
-					 " movie_title text, movie_desc text, movie_genre test, when_created datetime default (strftime('%Y-%m-%d %H:%M:%f', 'now')), " +
+					 " movie_title text, movie_desc text, movie_genre text, when_created datetime default (strftime('%Y-%m-%d %H:%M:%f', 'now')), " +
 					 " is_deleted bool default (0), user_modified int default (0));";
 
 				Insert(tableStr, false);
 			}
+
+			lok = GetScalar("select * from sqlite_master where type = 'table' and name = 'SimpleNote';");
+			if (lok == null)
+			{
+				// CURRENT_TIMESTAMP doesn't store milleseconds, therefore it has been changes to the 'strftime' function.
+				string tableStr = "create table SimpleNote (note_pk integer primary key autoincrement, note_name text, note_detail text, note_category text, " +
+					 " when_created datetime default (strftime('%Y-%m-%d %H:%M:%f', 'now')), is_deleted bool default (0), user_modified int default (0));";
+
+				Insert(tableStr, false);
+			}
 		}
+
+
 
 
 		/// <summary>

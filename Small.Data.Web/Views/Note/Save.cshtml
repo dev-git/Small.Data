@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Save";
+}
+
+    <div ng-controller="NoteController">
+        <legend>Note</legend>
+
+        <div class="editor-label">
+            Name
+        </div>
+        <div class="editor-field">
+            <input type ="text" ng-model="note.name" class="form-control" />
+        </div>
+
+        <div class="editor-label">
+            Detail
+        </div>
+        <div class="editor-field">
+            @*<input type ="text" ng-model="note.detail" class="form-control" />*@
+             <textarea class="form-control" rows="10" ng-model="note.detail"></textarea>
+        </div>
+
+         <div class="editor-label">
+            Category
+        </div>
+        <div class="editor-field">
+            <input type ="text" ng-model="note.category" class="form-control" />
+        </div>
+
+        <br />
+        <p>
+             <button class="btn btn-default" ng-click="save(note)" id="btnSave">Save Note</button>
+        </p>
+            <div style="color:red;" ng-show="error">An error occurred</div>
+   </div>
+
+@*<div>
+    @Html.ActionLink("Back to List", "List", "Note")
+</div>*@
+
